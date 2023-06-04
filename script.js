@@ -1,46 +1,45 @@
-var form=document.getElementById('addForm');
-var listItem=document.getElementById('items');
+const form=document.getElementById('addForm');
+const items=document.getElementById('items');
 
-form.addEventListener('submit',addItem);
-listItem.addEventListener('click',deleteItem);
 
-function addItem(e){
-
+form.addEventListener('submit',onSubmit);
+items.addEventListener('click',delteData);
+function onSubmit(e){
     e.preventDefault();
-   // console.log(1);
 
-   var newItem=document.getElementById('item').value;
+    //creating new Element li 
+    const input=document.getElementById('item').value;
 
-   var li=document.createElement('li');
+   const li=document.createElement('li');
    li.className='list-group-item';
 
-   li.appendChild(document.createTextNode(newItem));
+   li.appendChild(document.createTextNode(input));
+  
+    //creating Edit button
+    const editBtn=document.createElement('button');
+    editBtn.className='btn btn-success btn-sm float-right';
+    editBtn.appendChild(document.createTextNode('EDIT'));
+    li.appendChild(editBtn);
+   //Creating New Button Element 
+   const delBtn=document.createElement('button');
+   delBtn.className='btn btn-danger btn-sm float-right delete';
+   delBtn.appendChild(document.createTextNode('X'));
+   li.appendChild(delBtn);
 
-   
+  
 
 
-   var deleteBtn=document.createElement('button');
-   deleteBtn.className='btn btn-danger btn-sm float-right delete';
-   deleteBtn.appendChild(document.createTextNode('X'));
-   li.appendChild(deleteBtn);
-   listItem.appendChild(li);
-
-   var editBtn=document.createElement('button');
-   editBtn.className='Edit';
-   editBtn.appendChild(document.createTextNode('Edit'));
-   li.appendChild(editBtn);
-   listItem.appendChild(li);
-   
-   listItem.appendChild(li);
+   items.appendChild(li);
 }
 
-function deleteItem(e){
-
+function delteData(e){
     if(e.target.classList.contains('delete')){
-        if(confirm('Are You Sure?')){
-          var li = e.target.parentElement;
-          listItem.removeChild(li);
-        }
-      }
+       if(confirm('Are You Sure?')){
+        const li=e.target.parentElement;
+        items.removeChild(li);
+       }
+    }
+
+   
 }
 
